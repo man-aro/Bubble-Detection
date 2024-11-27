@@ -73,10 +73,12 @@ else:
     Date_Period_Min = Date_Period[0].strftime('%Y-%m-%d')
     Date_Period_Max = Date_Period[-1].strftime('%Y-%m-%d')
     
-    st.write(Date_Period_Min)
-    st.write(Date_Period_Max)
+    st.write("Detection Period: " + Date_Period_Min + " ---- " + Date_Period_Max)
+
     
     Bubble['Str_Date'] = Bubble['Date'].apply(lambda x: x.strftime('%Y-%m-%d'))
+    Bubble = Bubble[(Bubble['Date'] >= Date_Period_Min) & (Bubble['Date'] <= Date_Period_Max)]
+    
     start = Bubble['Str_Date'].iloc[0]
     end = Bubble['Str_Date'].iloc[-1]
     
