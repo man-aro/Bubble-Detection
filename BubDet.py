@@ -109,4 +109,5 @@ else:
         Bubble_Data['Bubble Magnitude (%)'] = round(Bubble_Data['Bubble Magnitude (%)'], 2)
         
         st.dataframe(Bubble_Data, hide_index = True)
+        st.write("*Bubble Magnitude represents the lower bound of the stock price bubble.")
         
