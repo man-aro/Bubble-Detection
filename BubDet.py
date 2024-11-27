@@ -103,25 +103,22 @@ else:
     ax0.xaxis.set_tick_params(labelsize=x_ticks_size)
     
     ax10=fig.add_subplot(gs[1]) 
-    ax10_2 = ax10.twinx()
     ax10.plot(Bubble['Date'], Bubble[Threshold], color= color_significance , label =  r'$\alpha$' + ' =' + sig_level, zorder = 1)
 
     ax10.set_xticks(pd.date_range(start = start, end = end, freq = 'D'))
     ax10.xaxis.set_major_locator(mdates.MonthLocator(bymonth = range(1,13), bymonthday =1, interval =5))
-    ax10_2.plot(Bubble['Date'], Bubble['BM_%'], '-.', color = color_bubble, label = 'Bubble (%)', alpha = 1, zorder = 2)
-    ax10_2.set_xticks(pd.date_range(start = start, end = end, freq = 'D'))
-    ax10_2.xaxis.set_major_locator(mdates.MonthLocator(bymonth = range(1,13), bymonthday =1, interval =5))
+    ax10.plot(Bubble['Date'], Bubble['BM_%'], '-.', color = color_bubble, label = 'Bubble (%)', alpha = 1, zorder = 2)
+    ax10.set_xticks(pd.date_range(start = start, end = end, freq = 'D'))
+    ax10.xaxis.set_major_locator(mdates.MonthLocator(bymonth = range(1,13), bymonthday =1, interval =5))
 
 
     ax10.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
     ax10.legend(prop = {'size': legend_size}, frameon = True, loc = 2, ncol = 3,framealpha = 1.0)
     ax10.get_legend().set_title('Threshold (30 days)', prop = {'size': legend_size})
-    ax10_2.legend(prop = {'size': legend_size}, frameon = True, loc = 1, ncol = 1,framealpha = 1.0)              
-    ax10_2.axis('off')
     ax10.xaxis.set_tick_params(labelsize=x_ticks_size)
     ax10.yaxis.set_tick_params(labelsize=y_ticks_size)
     #Making 1st and last y-ticks invisible.
-    ax10.yaxis.get_major_ticks()[0].label1.set_visible(False) 
-    ax10.yaxis.get_major_ticks()[-1].label1.set_visible(False)
+    #ax10.yaxis.get_major_ticks()[0].label1.set_visible(False) 
+    #ax10.yaxis.get_major_ticks()[-1].label1.set_visible(False)
     
     st.pyplot(fig)
