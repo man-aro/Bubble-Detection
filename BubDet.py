@@ -117,11 +117,11 @@ else:
         st.write("No Bubbles Detected.")
     else: 
         Bubble_Data = Bubble_Data[['Date', 'S_P', BM]]
-        Bubble_Data['Call Option Bubble Magnitude ($)'] = Bubble_Data['S_P'] * Bubble_Data[BM]/100
-        Bubble_Data.rename(columns = {'S_P': 'Stock Price', BM: 'Call Option Bubble Magnitude (%)'}, inplace = True)
+        Bubble_Data['Bubble Magnitude ($)'] = Bubble_Data['S_P'] * Bubble_Data[BM]/100
+        Bubble_Data.rename(columns = {'S_P': 'Stock Price', BM: 'Bubble Magnitude (%)'}, inplace = True)
         Bubble_Data['Date'] = Bubble_Data['Date'].apply(lambda x: x.strftime('%Y-%m-%d'))
-        Bubble_Data['Call Option Bubble Magnitude ($)'] = round(Bubble_Data['Call Option Bubble Magnitude ($)'], 2)
-        Bubble_Data['Call Option Bubble Magnitude (%)'] = round(Bubble_Data['Call Option Bubble Magnitude (%)'], 2)
+        Bubble_Data['Bubble Magnitude ($)'] = round(Bubble_Data['Bubble Magnitude ($)'], 2)
+        Bubble_Data['Bubble Magnitude (%)'] = round(Bubble_Data['Bubble Magnitude (%)'], 2)
         
         st.dataframe(Bubble_Data, hide_index = True)
-        st.write('The call option bubble magnitude (% and $) represents the lower bound to the size of exuberance in the stock price.')
+        
