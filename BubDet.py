@@ -15,26 +15,18 @@ from datetime import datetime
 st.title('Deep Calibration Framework for Detecting Stock Bubbles using Option Prices')
 
 
-
-
 stock = st.selectbox("Select a Stock*: ", (' ', 'MSFT', 'AMZN', 'NVDA', 'AMD', 'META'))
-st.write("Selected Stock: ", stock)
-
-
-
 
 window_size = st.selectbox("Select a Window Size (days)*: ",(' ', '30', '60'))
 st.write("Window size determines the number of historical observations (days) from which information is considered for bubble detection.")
-st.write("Selected Window Size (days) is: ", window_size)
 
 sig_level = st.selectbox("Select a Level of Significance (%)*: ", (' ', '10%', '5%', '1%'))
 st.write("Bubble detection is stricter for lower levels of significance.")
-st.write("Selected Significance Level: ", sig_level)
 
 
 calibration_type = st.selectbox("Select Calibration Form :", (' ', 'Most Liquid Smile', 'Entire Surface'))
 st.write("Daily information regarding forward looking expectations of market participants can be gathered from the most liquid volatility smile (option maturity), or the entire surface.")
-st.write("Selected Calibration Form: ", calibration_type)
+
 
 if calibration_type == 'Most Liquid Smile':
    calibration = 'HCV'
@@ -54,16 +46,8 @@ elif sig_level == '1%':
     Threshold = 'Threshold_1'
     BM = 'BM_%_1'
 
-#stock = 'AMD'
-#window_size = str(30)
-#calibration = 'HCV'
-#sig = 'BUB_10'
-#Threshold = 'Threshold_10'
-#BM = 'BM_%_10'
-
 
 Date_Period = st.slider("Select Period:", value=(datetime(2022, 10, 25), datetime(2024, 4, 30)))
-
 
 if stock == ' ' or window_size == ' ' or calibration_type == ' ' or sig_level == ' ':
     st.write('Please select required fields *')
