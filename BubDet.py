@@ -14,6 +14,7 @@ from datetime import datetime
 
 st.title('Deep Calibration Framework for Detecting Stock Bubbles using Option Prices')
 
+st.write('Author: Manish Rajkumar Arora')
 
 stock = st.selectbox("Select a Stock*: ", (' ', 'MSFT', 'AMZN', 'NVDA', 'AMD', 'META'))
 
