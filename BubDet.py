@@ -24,7 +24,7 @@ sig_level = st.selectbox("Select a Level of Significance (%)*: ", (' ', '10%', '
 st.write("Bubble detection is stricter for lower levels of significance.")
 
 
-calibration_type = st.selectbox("Select Calibration Form :", (' ', 'Most Liquid Smile', 'Entire Surface'))
+calibration_type = st.selectbox("Select Calibration Form* :", (' ', 'Most Liquid Smile', 'Entire Surface'))
 st.write("Daily information regarding forward looking expectations of market participants can be gathered from the most liquid volatility smile (option maturity), or the entire surface.")
 
 
