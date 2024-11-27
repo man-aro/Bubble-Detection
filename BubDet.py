@@ -36,8 +36,15 @@ st.write("Selected Calibration Form: ", calibration_type)
 
 if calibration_type == 'Most Liquid Smile':
    calibration = 'HCV'
-else:
+elif calibration_type == 'Entire Surface':
    calibration = 'ATO'
+   
+if sig_level == '10%':
+    sig= 'BUB_10'
+elif sig_level == '5%':
+    sig = 'BUB_5'
+elif sig_level == '1%': 
+    sig_level = 'BUB_1'
     
 
 #stock = 'AMD'
@@ -76,7 +83,10 @@ else:
     tick_pad = 12
     Sub_Title_Size = 20
     
-    
+    #stock = 'AMD'
+    #window_size = str(30)
+    #calibration = 'HCV'
+    #sig = 'BUB_10'
     
     fig = plt.figure(figsize = (20, 12), constrained_layout=True)
     
@@ -84,7 +94,7 @@ else:
     
     ax0 = fig.add_subplot(gs[0,:]) 
     ax0.set_title(stock + ' Bubbles: ' , fontsize = Title_size)
-    ax0.bar(Bubble['Date'], Bubble['BUB_10']*1.4, linewidth = 1, alpha = 1, color = color_bubble, width = 2, label  = 'Bubble')
+    ax0.bar(Bubble['Date'], Bubble[sig]*1.4, linewidth = 1, alpha = 1, color = color_bubble, width = 2, label  = 'Bubble')
     ax0.plot(Bubble['Date'], Bubble['S_P'], color_SP, linewidth = 2, label = 'Price ($)', zorder = 2)
     ax0.set_xticks(pd.date_range(start = start, end = end, freq = 'D'))
     ax0.xaxis.set_major_locator(mdates.MonthLocator(bymonth = range(1,13), bymonthday =1, interval =4))
