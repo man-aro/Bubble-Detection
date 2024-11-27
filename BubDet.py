@@ -15,22 +15,22 @@ st.title('Deep Calibration Framework for Detecting Stock Bubbles using Option Pr
 
 
 
-stock = st.selectbox("Select a Stock: ", ('MSFT', 'AMZN', 'NVDA', 'AMD', 'META'))
+stock = st.selectbox("Select a Stock: ", (' ', 'MSFT', 'AMZN', 'NVDA', 'AMD', 'META'))
 st.write("Selected Stock: ", stock)
 
 
 
 
-window_size = st.selectbox("Select a Window Size (days): ",('30', '60'))
+window_size = st.selectbox("Select a Window Size (days): ",(' ', '30', '60'))
 st.write("Window size determines the number of historical observations (days) from which information is considered for bubble detection.")
 st.write("Selected Window Size (days) is: ", window_size)
 
-sig_level = st.selectbox("Select a Level of Significance (%): ", ('10%', '5%', '1%'))
+sig_level = st.selectbox("Select a Level of Significance (%): ", (' ', '10%', '5%', '1%'))
 st.write("Bubble detection is stricter for lower levels of significance.")
 st.write("Selected Significance Level: ", sig_level)
 
 
-calibration_type = st.selectbox("Select Calibration Form :", ('Most Liquid Smile', 'Entire Surface'))
+calibration_type = st.selectbox("Select Calibration Form :", (' ', 'Most Liquid Smile', 'Entire Surface'))
 st.write("Daily information regarding forward looking expectations of market participants can be gathered from the most liquid volatility smile (option maturity), or the entire surface.")
 st.write("Selected Calibration Form: ", calibration_type)
 
