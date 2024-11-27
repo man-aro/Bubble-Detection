@@ -44,7 +44,7 @@ if sig_level == '10%':
 elif sig_level == '5%':
     sig = 'BUB_5'
 elif sig_level == '1%': 
-    sig_level = 'BUB_1'
+    sig = 'BUB_1'
     
 
 #stock = 'AMD'
