@@ -10,11 +10,8 @@ import pandas as pd
 
 st.write("First Attempt: Create Table")
 
-st.write(pd.DataFrame({'1st Column': [1, 2, 3, 4],
-                      '2nd Column': [10, 20, 30, 40]}))
 
-
-option = st.selectbox('Contact', ('Email', 'Phone'))
+option = st.selectbox('Contact', ('Email', 'Phone'), ('marora6899@gmail.com', '+44 0 7476720446'))
 st.write('You selected:', option)
 
-st.markdown("Source: <https://bubbledetection_MRA.com")
+
