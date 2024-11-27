@@ -44,18 +44,22 @@ elif calibration_type == 'Entire Surface':
 if sig_level == '10%':
     sig= 'BUB_10'
     Threshold = 'Threshold_10'
+    BM = 'BM_%_10'
 elif sig_level == '5%':
     sig = 'BUB_5'
     Threshold = 'Threshold_5'
+    BM = 'BM_%_5'
 elif sig_level == '1%': 
     sig = 'BUB_1'
     Threshold = 'Threshold_1'
-    
+    BM = 'BM_%_1'
+
 #stock = 'AMD'
 #window_size = str(30)
 #calibration = 'HCV'
 #sig = 'BUB_10'
 #Threshold = 'Threshold_10'
+#BM = 'BM_%_10'
 
 
 Date_Period = st.slider("Select Period:", value=(datetime(2022, 10, 25), datetime(2024, 4, 30)))
@@ -73,9 +77,6 @@ else:
     Date_Period_Min = Date_Period[0].strftime('%Y-%m-%d')
     Date_Period_Max = Date_Period[-1].strftime('%Y-%m-%d')
     
-    st.write("Detection Period: " + Date_Period_Min + " ---- " + Date_Period_Max)
-
-    
     Bubble['Str_Date'] = Bubble['Date'].apply(lambda x: x.strftime('%Y-%m-%d'))
     Bubble = Bubble[(Bubble['Date'] >= Date_Period_Min) & (Bubble['Date'] <= Date_Period_Max)]
     
@@ -91,13 +92,8 @@ else:
     title_1_size = 20
     y_ticks_size = 20
     x_ticks_size = 20
-    y_label_size = 15
-    x_label_size = 20
     ax0_legend_size = 20
-    legend_size = 18
-    tick_pad = 12
-    Sub_Title_Size = 20
-    
+
     fig = plt.figure(figsize = (20, 12), constrained_layout=True)
     
     gs=fig.add_gridspec(2,1)
@@ -114,3 +110,15 @@ else:
     ax0.xaxis.set_tick_params(labelsize=x_ticks_size)
 
     st.pyplot(fig)
+
+    Bubble_Data = Bubble[Bubble[sig] != 0]
+    
+    if len(Bubble_Data) == 0: 
+        st.write("No Bubbles Detected.")
+    else: 
+        Bubble_Data = Bubble_Data[['Date', 'S_P', BM]]
+        Bubble_Data['Call Option Bubble Magnitude ($)'] = Bubble_Data['S_P'] * Bubble_Data[BM]
+        Bubble_Data.rename(columns = {'S_P': 'Stock Price', BM: 'Call Option Bubble Magnitude (%)'}, inplace = True)
+        
+        st.dataframe(Bubble_Data)
+        st.write('The call option bubble magnitude (% and $) represents the size of exuberance in the stock price.')
