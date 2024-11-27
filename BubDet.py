@@ -10,6 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.ticker import FormatStrFormatter
+from datetime import datetime
 
 st.title('Deep Calibration Framework for Detecting Stock Bubbles using Option Prices')
 
@@ -50,12 +51,15 @@ elif sig_level == '1%':
     sig = 'BUB_1'
     Threshold = 'Threshold_1'
     
-
 #stock = 'AMD'
 #window_size = str(30)
 #calibration = 'HCV'
 #sig = 'BUB_10'
 #Threshold = 'Threshold_10'
+
+
+Date_Period = st.slider("Select Period:", value=(datetime(2022, 10, 25), datetime(2024, 4, 30)))
+st.write("Period for Daily Bubble Detection:", Date_Period)
 
 if stock == ' ' or window_size == ' ' or calibration_type == ' ' or sig_level == ' ':
     st.write('Please select required fields *')
@@ -66,6 +70,8 @@ else:
     Bubble['Date'] = pd.to_datetime(Bubble['Date'])
     Bubble.sort_values('Date', inplace = True)
     Bubble.reset_index(inplace = True)
+    
+    Bubble
     
     Bubble['Str_Date'] = Bubble['Date'].apply(lambda x: x.strftime('%Y-%m-%d'))
     start = Bubble['Str_Date'].iloc[0]
@@ -98,27 +104,8 @@ else:
     ax0.set_xticks(pd.date_range(start = start, end = end, freq = 'D'))
     ax0.xaxis.set_major_locator(mdates.MonthLocator(bymonth = range(1,13), bymonthday =1, interval =4))
     
-    ax0.legend(prop = {'size': ax0_legend_size}, frameon = True, loc = 9, ncol = 5,framealpha = 1.0)
+    ax0.legend(bbox_to_anchor=(0.75, 1.0), prop = {'size': ax0_legend_size}, frameon = True, ncol = 2,framealpha = 1.0)
     ax0.yaxis.set_tick_params(labelsize=y_ticks_size)
     ax0.xaxis.set_tick_params(labelsize=x_ticks_size)
-    
-    ax10=fig.add_subplot(gs[1]) 
-    ax10.plot(Bubble['Date'], Bubble[Threshold], color= color_significance , label =  r'$\alpha$' + ' =' + sig_level, zorder = 1)
 
-    ax10.set_xticks(pd.date_range(start = start, end = end, freq = 'D'))
-    ax10.xaxis.set_major_locator(mdates.MonthLocator(bymonth = range(1,13), bymonthday =1, interval =5))
-    ax10.plot(Bubble['Date'], Bubble['BM_%'], '-.', color = color_bubble, label = 'Bubble (%)', alpha = 1, zorder = 2)
-    ax10.set_xticks(pd.date_range(start = start, end = end, freq = 'D'))
-    ax10.xaxis.set_major_locator(mdates.MonthLocator(bymonth = range(1,13), bymonthday =1, interval =5))
-
-
-    ax10.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
-    ax10.legend(prop = {'size': legend_size}, frameon = True, loc = 2, ncol = 3,framealpha = 1.0)
-    ax10.get_legend().set_title('Threshold (30 days)', prop = {'size': legend_size})
-    ax10.xaxis.set_tick_params(labelsize=x_ticks_size)
-    ax10.yaxis.set_tick_params(labelsize=y_ticks_size)
-    #Making 1st and last y-ticks invisible.
-    #ax10.yaxis.get_major_ticks()[0].label1.set_visible(False) 
-    #ax10.yaxis.get_major_ticks()[-1].label1.set_visible(False)
-    
     st.pyplot(fig)
