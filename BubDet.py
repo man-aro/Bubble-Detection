@@ -117,7 +117,7 @@ else:
         st.write("No Bubbles Detected.")
     else: 
         Bubble_Data = Bubble_Data[['Date', 'S_P', BM]]
-        Bubble_Data['Call Option Bubble Magnitude ($)'] = Bubble_Data['S_P'] * Bubble_Data[BM]
+        Bubble_Data['Call Option Bubble Magnitude ($)'] = Bubble_Data['S_P'] * Bubble_Data[BM] * 100
         Bubble_Data.rename(columns = {'S_P': 'Stock Price', BM: 'Call Option Bubble Magnitude (%)'}, inplace = True)
         Bubble_Data['Date'] = Bubble_Data['Date'].apply(lambda x: x.strftime('%Y-%m-%d'))
         Bubble_Data['Call Option Bubble Magnitude ($)'] = round(Bubble_Data['Call Option Bubble Magnitude ($)'], 2)
