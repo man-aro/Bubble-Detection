@@ -70,8 +70,8 @@ else:
     Bubble['Date'] = pd.to_datetime(Bubble['Date'])
     Bubble.sort_values('Date', inplace = True)
     Bubble.reset_index(inplace = True)
-    Date_Period_Min = Date_Period.min().strftime('%Y-%m-%d')
-    Date_Period_Max = Date_Period.max().strftime('%Y-%m-%d')
+    Date_Period_Min = Date_Period[0].strftime('%Y-%m-%d')
+    Date_Period_Max = Date_Period[-1].strftime('%Y-%m-%d')
     
     st.write('Date_Period_Min')
     st.write('Date_Period_Max')
