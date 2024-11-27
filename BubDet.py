@@ -7,8 +7,9 @@ Created on Wed Nov 27 14:13:17 2024
 
 import streamlit as st
 import pandas as pd
+import io
 
-
+import requests
 
 st.title('Deep Calibration Framework for Detecting Stock Bubbles using Option Prices')
 
@@ -34,3 +35,23 @@ calibration_type = st.selectbox("Select Calibration Form :", ('Most Liquid Smile
 st.write("Daily information regarding forward looking expectations of market participants can be gathered from the most liquid volatility smile (option maturity), or the entire surface.")
 st.write("Selected Calibration Form: ", calibration_type)
          
+
+x = window_size
+st.write(x)
+
+
+
+calibration = 'HCV'
+
+if calibration_type == 'Most Liquid Smile':
+   calibration = 'HCV'
+else:
+   calibration = 'ATO'
+    
+    
+
+url="https://raw.githubusercontent.com/man-aro/BubbleDetection/main/Data/" + stock + "_NN/Bubble_Magnitudes_NN_" + calibration + "_671_i_" + window_size + ".csv"
+
+st.write(url)
+
+df = pd.read_csv(url)
