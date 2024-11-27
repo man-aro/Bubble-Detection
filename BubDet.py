@@ -59,7 +59,7 @@ elif sig_level == '1%':
 
 
 Date_Period = st.slider("Select Period:", value=(datetime(2022, 10, 25), datetime(2024, 4, 30)))
-st.write("Period for Daily Bubble Detection:", Date_Period)
+st.write("Period for Daily Bubble Detection:", Date_Period.strftime('%Y-%m-%d'))
 
 if stock == ' ' or window_size == ' ' or calibration_type == ' ' or sig_level == ' ':
     st.write('Please select required fields *')
@@ -71,7 +71,6 @@ else:
     Bubble.sort_values('Date', inplace = True)
     Bubble.reset_index(inplace = True)
     
-    Bubble
     
     Bubble['Str_Date'] = Bubble['Date'].apply(lambda x: x.strftime('%Y-%m-%d'))
     start = Bubble['Str_Date'].iloc[0]
